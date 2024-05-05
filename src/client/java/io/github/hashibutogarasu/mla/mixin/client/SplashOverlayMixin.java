@@ -11,8 +11,6 @@ import net.minecraft.resource.ResourceReload;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Opcodes;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -35,9 +33,6 @@ public abstract class SplashOverlayMixin {
     @Shadow @Final private boolean reloading;
 
     @Unique
-    private static final Logger LOGGER = LoggerFactory.getLogger(SplashOverlayMixin.class);
-
-    @Unique
     private boolean animationStarting = false;
 
     @Unique
@@ -45,9 +40,6 @@ public abstract class SplashOverlayMixin {
 
     @Unique
     private int animProgress = 0;
-
-    @Unique
-    private boolean playing = false;
 
     @Unique
     private final PositionedSoundInstance MOJANG_SOUND = PositionedSoundInstance.master(mode == ModConfig.Mode.MOJANG_STUDIOS ? ModSounds.MOJANG_LOGO_SOUND_EVENT : ModSounds.MOJANG_APRIL_FOOL_SOUND_EVENT, 1.0f, 1.0f);
@@ -70,7 +62,7 @@ public abstract class SplashOverlayMixin {
         return this.reload.getProgress();
     }
 
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;fill(Lnet/minecraft/client/render/RenderLayer;IIIII)V"), cancellable = true)
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;fill(Lnet/minecraft/client/render/RenderLayer;IIIII)V"))
     private void fill(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
 
     }
@@ -91,7 +83,6 @@ public abstract class SplashOverlayMixin {
             }
         }
 
-        this.playing = client.getSoundManager().isPlaying(MOJANG_SOUND);
         context.drawTexture(mode == ModConfig.Mode.MOJANG_STUDIOS ? getMojang(this.animProgress) : getAprilfool(this.animProgress), x, y, r, (int) d, u, v, regionWidth, regionHeight + 60, textureWidth, textureHeight);
     }
 
