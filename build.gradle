@@ -105,6 +105,5 @@ curseforge {
 		addGameVersion project.minecraft_version
 		addGameVersion "Fabric"
 		addGameVersion "Java 17"
-		addGameVersion "Java 21"
 	}
 }
