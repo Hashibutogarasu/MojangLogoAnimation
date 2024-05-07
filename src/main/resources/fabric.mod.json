@@ -3,17 +3,17 @@
 	"id": "mla",
 	"version": "${version}",
 	"name": "MojangLogoAnimation",
-	"description": "",
+	"description": "This mod changes loading screen.",
 	"authors": [
 		"Hashibutogarasu"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"issues": "https://github.com/Hashibutogarasu/MojangLogoAnimation/issues",
+		"sources": "https://github.com/Hashibutogarasu/MojangLogoAnimation"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/mla/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"main": [
 			"io.github.hashibutogarasu.mla.MojangLogoAnimation"
