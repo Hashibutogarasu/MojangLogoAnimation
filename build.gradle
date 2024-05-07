@@ -1,13 +1,19 @@
 plugins {
 	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
+	id 'com.palantir.git-version' version '3.0.0'
+	id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
-version = project.mod_version
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+//version = project.mod_version
+version = gitVersion()
 group = project.maven_group
 
 base {
-	archivesName = project.archives_base_name
+	archivesName = project.archives_base_name + "-" + project.minecraft_version + "-" + "Fabric"
 }
 
 repositories {
@@ -86,5 +92,16 @@ publishing {
 		// Notice: This block does NOT have the same function as the block in the top level.
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
+	}
+}
+
+
+curseforge {
+	apiKey = properties.get("CURSEFORGE_API_KEY") // This should really be in a gradle.properties file
+	project {
+		id = properties.get("CURSEFORGE_PROJECT_ID")
+		changelog = file("changelog.txt") // A file can also be set using: changelog = file('changelog.txt')
+		releaseType = "beta"
+		addGameVersion project.minecraft_version
 	}
 }
