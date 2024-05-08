@@ -106,6 +106,6 @@ publishMods {
 		projectSlug = "mojang-logo-animation" // Required for discord webhook
 		accessToken = properties.get("CURSEFORGE_API_KEY")
 		minecraftVersions.add("${project.minecraft_version}")
-		requires("fabric-api")
+		requires("fabric-api", "cloth-config")
 	}
 }
