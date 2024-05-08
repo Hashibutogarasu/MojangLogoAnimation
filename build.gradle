@@ -2,7 +2,7 @@ plugins {
 	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
 	id 'com.palantir.git-version' version '3.0.0'
-	id "me.modmuss50.mod-publish-plugin" version "0.5.1"
+	id "me.modmuss50.mod-publish-plugin" version '0.5.1'
 }
 
 Properties properties = new Properties()
@@ -95,6 +95,8 @@ publishing {
 	}
 }
 
+
+
 publishMods {
 	file = remapJar.archiveFile
 	changelog = "Changed mod publish plugin"
@@ -106,6 +108,6 @@ publishMods {
 		projectSlug = "mojang-logo-animation" // Required for discord webhook
 		accessToken = properties.get("CURSEFORGE_API_KEY")
 		minecraftVersions.add("${project.minecraft_version}")
-		requires("fabric-api")
+		requires("fabric-api", "cloth-config")
 	}
 }
