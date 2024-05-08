@@ -2,7 +2,7 @@ plugins {
 	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
 	id 'com.palantir.git-version' version '3.0.0'
-	id 'com.matthewprenger.cursegradle' version '1.4.0'
+	id "me.modmuss50.mod-publish-plugin" version "0.5.1"
 }
 
 Properties properties = new Properties()
@@ -95,15 +95,17 @@ publishing {
 	}
 }
 
+publishMods {
+	file = remapJar.archiveFile
+	changelog = file("changelog.txt")
+	type = BETA
+	modLoaders.add("fabric")
 
-curseforge {
-	apiKey = properties.get("CURSEFORGE_API_KEY") // This should really be in a gradle.properties file
-	project {
-		id = properties.get("CURSEFORGE_PROJECT_ID")
-		changelog = file("changelog.txt") // A file can also be set using: changelog = file('changelog.txt')
-		releaseType = "beta"
-		addGameVersion project.minecraft_version
-		addGameVersion "Fabric"
-		addGameVersion "Java 17"
+	curseforge {
+		projectId = properties.get("CURSEFORGE_PROJECT_ID")
+		projectSlug = "mojang-logo-animation" // Required for discord webhook
+		accessToken = properties.get("CURSEFORGE_API_KEY")
+		minecraftVersions.add("1.20.4")
+		requires("fabric-api")
 	}
 }
