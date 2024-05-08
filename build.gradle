@@ -2,7 +2,7 @@ plugins {
 	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
 	id 'com.palantir.git-version' version '3.0.0'
-	id 'com.matthewprenger.cursegradle' version '1.4.0'
+	id "me.modmuss50.mod-publish-plugin" version "0.5.1"
 }
 
 Properties properties = new Properties()
@@ -42,11 +42,11 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modApi("me.shedaniel.cloth:cloth-config-fabric:14.0.126") {
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.clothconfig_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
-	modApi "com.terraformersmc:modmenu:10.0.0-beta.1"
+	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
 }
 
 processResources {
@@ -95,13 +95,17 @@ publishing {
 	}
 }
 
+publishMods {
+	file = remapJar.archiveFile
+	changelog = "Changed mod publish plugin"
+	type = BETA
+	modLoaders.add("fabric")
 
-curseforge {
-	apiKey = properties.get("CURSEFORGE_API_KEY") // This should really be in a gradle.properties file
-	project {
-		id = properties.get("CURSEFORGE_PROJECT_ID")
-		changelog = file("changelog.txt") // A file can also be set using: changelog = file('changelog.txt')
-		releaseType = "beta"
-		addGameVersion project.minecraft_version
+	curseforge {
+		projectId = properties.get("CURSEFORGE_PROJECT_ID")
+		projectSlug = "mojang-logo-animation" // Required for discord webhook
+		accessToken = properties.get("CURSEFORGE_API_KEY")
+		minecraftVersions.add("${project.minecraft_version}")
+		requires("fabric-api")
 	}
 }
