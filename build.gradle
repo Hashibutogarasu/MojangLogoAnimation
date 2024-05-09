@@ -97,7 +97,7 @@ publishing {
 
 publishMods {
 	file = remapJar.archiveFile
-	changelog = "Changed mod publish plugin"
+	changelog = "Added mod requires"
 	type = BETA
 	modLoaders.add("fabric")
 
