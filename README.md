@@ -12,3 +12,4 @@ This mod changes loading screen.
 ![MojangStudioMode](https://raw.githubusercontent.com/Hashibutogarasu/MojangLogoAnimation-Assets/main/mojang_studios.gif)
 ![3dSharewareMode](https://raw.githubusercontent.com/Hashibutogarasu/MojangLogoAnimation-Assets/main/april_fool.gif)
 # MojangLogoAnimation-Forge
+# MojangLogoAnimation-Forge
