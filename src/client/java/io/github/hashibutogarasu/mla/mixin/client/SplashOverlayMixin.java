@@ -25,12 +25,19 @@ public abstract class SplashOverlayMixin {
     @Unique
     private static boolean firstLoad = true;
 
-    @Shadow @Final private ResourceReload reload;
+    @Shadow
+    @Final
+    private ResourceReload reload;
 
-    @Shadow private float progress;
+    @Shadow
+    private float progress;
 
-    @Shadow @Final private MinecraftClient client;
-    @Shadow @Final private boolean reloading;
+    @Shadow
+    @Final
+    private MinecraftClient client;
+    @Shadow
+    @Final
+    private boolean reloading;
 
     @Unique
     private boolean animationStarting = false;
@@ -69,12 +76,12 @@ public abstract class SplashOverlayMixin {
 
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIIFFIIII)V", ordinal = 0))
     private void drawTexture0(DrawContext context, Identifier texture, int x, int y, int width, int height, float u, float v, int regionWidth, int regionHeight, int textureWidth, int textureHeight) {
-        double d = Math.min((double)context.getScaledWindowWidth() * 0.75, context.getScaledWindowHeight()) * 0.25;
+        double d = Math.min((double) context.getScaledWindowWidth() * 0.75, context.getScaledWindowHeight()) * 0.25;
         double e = d * 4.0;
-        int r = (int)(e);
+        int r = (int) (e);
 
-        if(progress > 0){
-            if(!animationStarting && firstLoad){
+        if (progress > 0) {
+            if (!animationStarting && firstLoad) {
                 this.reload.whenComplete().thenAccept(object -> {
                     client.getSoundManager().play(MOJANG_SOUND);
                     getAnimationThread().start();
@@ -101,20 +108,20 @@ public abstract class SplashOverlayMixin {
     }
 
     @Unique
-    private Identifier getMojang(int index){
-        return firstLoad ? new Identifier("mla", "textures/gui/title/mojang/mojang" + index + ".png") : new Identifier("mla", "textures/gui/title/mojang/mojang38.png");
+    private Identifier getMojang(int index) {
+        return firstLoad ? Identifier.of("mla", "textures/gui/title/mojang/mojang" + index + ".png") : Identifier.of("mla", "textures/gui/title/mojang/mojang38.png");
     }
 
     @Unique
-    private Identifier getAprilfool(int index){
-        return firstLoad ? new Identifier("mla", "textures/gui/title/mojang_april_fool/mojang" + index + ".png") : new Identifier("mla", "textures/gui/title/mojang/mojang38.png");
+    private Identifier getAprilfool(int index) {
+        return firstLoad ? Identifier.of("mla", "textures/gui/title/mojang_april_fool/mojang" + index + ".png") : Identifier.of("mla", "textures/gui/title/mojang/mojang38.png");
     }
 
     @Unique
     private @NotNull Thread getAnimationThread() {
-        var animthread = new Thread(()->{
+        var animthread = new Thread(() -> {
             this.animProgress = 0;
-            for(int i = 0; i < 38; i++){
+            for (int i = 0; i < 38; i++) {
                 animProgress++;
                 try {
                     Thread.sleep(70);
