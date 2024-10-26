@@ -1,44 +1,44 @@
 {
-	"schemaVersion": 1,
-	"id": "mla",
-	"version": "${version}",
-	"name": "MojangLogoAnimation",
-	"description": "",
-	"authors": [
-		"Hashibutogarasu"
-	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/mla/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"io.github.hashibutogarasu.mla.MojangLogoAnimation"
-		],
-		"client": [
-			"io.github.hashibutogarasu.mla.MojangLogoAnimationClient"
-		],
-		"modmenu": [
-			"io.github.hashibutogarasu.mla.ModMenuIntegration"
-		]
-	},
-	"mixins": [
-		"mla.mixins.json",
-		{
-			"config": "mla.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.16.5",
-		"minecraft": "~1.21",
-		"java": ">=21",
-		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
-	}
+  "schemaVersion": 1,
+  "id": "mla",
+  "version": "${version}",
+  "name": "MojangLogoAnimation",
+  "description": "",
+  "authors": [
+    "Hashibutogarasu || DaveDuart (Forked)"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/mla/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.hashibutogarasu.mla.MojangLogoAnimation"
+    ],
+    "client": [
+      "io.github.hashibutogarasu.mla.MojangLogoAnimationClient"
+    ],
+    "modmenu": [
+      "io.github.hashibutogarasu.mla.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "mla.mixins.json",
+    {
+      "config": "mla.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.5",
+    "minecraft": "~1.21",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
 }
