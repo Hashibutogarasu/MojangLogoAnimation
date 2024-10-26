@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.concurrent.ExecutorService;
 import java.util.function.Function;
 
 @Mixin(SplashOverlay.class)
@@ -101,25 +102,26 @@ public abstract class SplashOverlayMixin {
 
     @Unique
     private @NotNull Thread getAnimationThread() {
-        var animthread = new Thread(() -> {
+        Thread animThread = new Thread(() -> {
             this.animProgress = 0;
             for (int i = 0; i < 38; i++) {
                 animProgress++;
                 try {
                     Thread.sleep(70);
-                } catch (InterruptedException ignored) {
-
+                } catch (InterruptedException e) {
+                    System.err.println("Animation thread was interrupted during progress sleep: " + e.getMessage());
+                    return;
                 }
             }
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException ignored) {
-
+            } catch (InterruptedException e) {
+                System.err.println("Animation thread was interrupted during final sleep: " + e.getMessage());
             }
             animationEnded = true;
         });
 
-        animthread.setName("animthread");
-        return animthread;
+        animThread.setName("animThread");
+        return animThread;
     }
 }
