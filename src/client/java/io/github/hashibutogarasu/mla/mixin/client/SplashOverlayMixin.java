@@ -102,12 +102,12 @@ public abstract class SplashOverlayMixin {
 
     @Unique
     private Identifier getMojang(int index){
-        return firstLoad ? new Identifier("mla", "textures/gui/title/mojang/mojang" + index + ".png") : new Identifier("mla", "textures/gui/title/mojang/mojang38.png");
+        return firstLoad ? Identifier.of("mla", "textures/gui/title/mojang/mojang" + index + ".png") : Identifier.of("mla", "textures/gui/title/mojang/mojang38.png");
     }
 
     @Unique
     private Identifier getAprilfool(int index){
-        return firstLoad ? new Identifier("mla", "textures/gui/title/mojang_april_fool/mojang" + index + ".png") : new Identifier("mla", "textures/gui/title/mojang/mojang38.png");
+        return firstLoad ? Identifier.of("mla", "textures/gui/title/mojang_april_fool/mojang" + index + ".png") : Identifier.of("mla", "textures/gui/title/mojang/mojang38.png");
     }
 
     @Unique
