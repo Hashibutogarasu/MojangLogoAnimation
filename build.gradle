@@ -162,4 +162,10 @@ publishMods {
 		minecraftVersions.add("${minecraft_version}")
 		requires("fabric-api", "cloth-config")
 	}
+
+	modrinth {
+    projectId = project_id
+    accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+    minecraftVersions.add(minecraft_version)
+  }
 }
