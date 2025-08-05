@@ -150,7 +150,7 @@ task generateChangelogLimited {
 
 publishMods {
 	file = remapJar.archiveFile
-	changelog = file('changelog.txt')
+	changelog = file('changelog.txt').text
 	type = ReleaseType.STABLE
 	modLoaders.add("fabric")
 
