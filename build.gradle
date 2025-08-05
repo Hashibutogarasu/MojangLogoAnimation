@@ -4,7 +4,7 @@ plugins {
 	id 'fabric-loom' version '1.7.3'
 	id 'maven-publish'
 	id 'com.palantir.git-version' version '3.0.0'
-	id "me.modmuss50.mod-publish-plugin" version "0.5.1"
+	id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
 
 Properties properties = new Properties()
