@@ -163,6 +163,3 @@ publishMods {
 		requires("fabric-api", "cloth-config")
 	}
 }
-
-// Auto-generate changelog before publishing
-publishMods.dependsOn generateChangelogLimited
