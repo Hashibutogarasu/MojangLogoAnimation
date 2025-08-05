@@ -97,9 +97,60 @@ publishing {
 	}
 }
 
+// Generate changelog from git commits
+task generateChangelog {
+	description = 'Generate changelog from git commits'
+	group = 'documentation'
+	
+	doLast {
+		def gitLog = 'git log --oneline --pretty=format:"- %s"'.execute()
+		gitLog.waitFor()
+		
+		if (gitLog.exitValue() == 0) {
+			def commitMessages = gitLog.text.trim()
+			def changelogContent = "Change Logs\n" + commitMessages
+			
+			def changelogFile = file('changelog.txt')
+			changelogFile.text = changelogContent
+			
+			println "Changelog generated successfully!"
+			println "Generated content:"
+			println changelogContent
+		} else {
+			println "Error: Failed to get git log"
+		}
+	}
+}
+
+// Generate changelog for specific number of commits
+task generateChangelogLimited {
+	description = 'Generate changelog from last N git commits'
+	group = 'documentation'
+	
+	doLast {
+		def commitCount = project.hasProperty('commitCount') ? project.commitCount : '10'
+		def gitLog = "git log --oneline --pretty=format:\"- %s\" -${commitCount}".execute()
+		gitLog.waitFor()
+		
+		if (gitLog.exitValue() == 0) {
+			def commitMessages = gitLog.text.trim()
+			def changelogContent = "Change Logs\n" + commitMessages
+			
+			def changelogFile = file('changelog.txt')
+			changelogFile.text = changelogContent
+			
+			println "Changelog generated successfully for last ${commitCount} commits!"
+			println "Generated content:"
+			println changelogContent
+		} else {
+			println "Error: Failed to get git log"
+		}
+	}
+}
+
 publishMods {
 	file = remapJar.archiveFile
-	changelog = "Changed displayName"
+	changelog = file('changelog.txt')
 	type = ReleaseType.STABLE
 	modLoaders.add("fabric")
 
@@ -112,3 +163,6 @@ publishMods {
 		requires("fabric-api", "cloth-config")
 	}
 }
+
+// Auto-generate changelog before publishing
+publishMods.dependsOn generateChangelogLimited

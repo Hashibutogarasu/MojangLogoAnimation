@@ -1,1 +1,6 @@
-Updated to STABLE
+Change Logs
+- Merge commit 'e863be2f39d5e68d5dd4c4c23229c6b4e343e707'
+- Updated fabric loader depends
+- Updated to Java 21
+- Updated mod depends
+- Updated to 1.21.1
